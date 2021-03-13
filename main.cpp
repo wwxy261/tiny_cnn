@@ -24,14 +24,15 @@ int main() {
     std::cout << "mnist test number: " << n_test << std::endl;
     std::cout << "mnist test size (28 * 28 * 1) = " << dim_in << std::endl;
     Network serial_net;
-    Layer* conv1 = new Conv(1, 28, 28, 4, 5, 5, 2, 2, 2);
+    Layer* conv1 = new Conv(1, 28, 28, 6, 5, 5, 1, 0, 0);
     Layer* rule1 = new Relu;
-    Layer* pool1 = new MaxPooling(4, 14, 14, 2, 2, 2);
+    Layer* pool1 = new MaxPooling(6, 24, 24, 2, 2, 2);
+    //Layer* conv2 = new Conv(6,)
     serial_net.add_layer(conv1);
     serial_net.add_layer(rule1);
     serial_net.add_layer(pool1);
 
-    const int n_epoch = 50;
+    const int n_epoch = 100;
 
     clock_t start = clock();
     for(int i=0;i<n_epoch;i++){
@@ -45,18 +46,18 @@ int main() {
 
     Network fuse_net;
     Layer* conv_rule_pooling = new Conv_relu_max_pooling(1,28,28,
-                                                         4,5,5,
-                                                         2,2,2,2,2,2);
+                                                         6,5,5,
+                                                         2,2,1,2,0,0);
     start = clock();
     fuse_net.add_layer(conv_rule_pooling);
     for(int i=0;i<n_epoch;i++){
         fuse_net.forward(dataset.test_data);
     }
     end = clock();
-    
+
     float result2 = (conv_rule_pooling->data_output.sum())/(conv_rule_pooling->data_output.rows())/(conv_rule_pooling->data_output.cols());
     std::cout << "fuse_net time cost " << (double) (end - start)/CLOCKS_PER_SEC <<"s"<< std::endl;
-
+    std::cout << "output data size " << conv_rule_pooling->data_output.cols() << " " << conv_rule_pooling->data_output.rows() << std::endl;
     if(check_flot_equal(result1,result2)){
         std::cout << "test result pass" << std::endl;
     }else{
