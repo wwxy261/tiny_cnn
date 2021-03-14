@@ -12,7 +12,7 @@
   1. [Introduction](#introduction) 
   2. [Results](#results)
   3. [Objects](#objects)
-  4. [Arrays](#arrays)
+  
 
 
 ## Introduction
@@ -59,12 +59,12 @@ make
 后者还是用了Intel ICC编译器优化。
 
 ### 1. forward results
-调用$n$次从网络输入到输出forward计时测试程序性能。
-| $n$    | Pytorch  | serial  |fuse    | 24-core | 24-core-fuse|naive-numpy | fuse_numpy
+调用n次从网络输入到输出forward计时测试程序性能。
+| n    | Pytorch  | serial  |fuse    | 24-core | 24-core-fuse|naive-numpy | fuse_numpy
 |  :---- | :----    | :---    |:---    | :---    |   :---  |   :---         |   :---
-| $n=1$  | $0.582$s | $1.042$s |$0.995$s | $0.452$s | $0.431$s |   $332.457$s|   $64.329$s
-| $n=10$ | $4.467$s | $7.357$s |$7.850$s | $1.433$s | $1.254$s |      -      |   -   |
-| $n=100$| $42.883$s| $69.868$s|$77.798$s| $10.548$s| $9.938$s|       -      |   -   |
+| n=1  | 0.582s | 1.042s |0.995s | 0.452s | 0.431s |   332.457s|   64.329s
+| n=10 | 4.467s | 7.357s |7.850s | 1.433s | 1.254s |      -      |   -   |
+| n=100| 42.883s| 69.868s|77.798s| 10.548s| 9.938s|       -      |   -   |
 
 
 
