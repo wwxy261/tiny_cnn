@@ -21,6 +21,8 @@ void MaxPooling::forward(const Matrix& data_input) {
     data_output.resize(dim_out, n_sample);
     data_output.setZero(); data_output.array() += std::numeric_limits<float>::lowest();
     max_idxs.resize(n_sample, std::vector<int>(dim_out, 0));
+
+    #pragma omp parallel for
     for (int i = 0; i < n_sample; i ++) {
         Vector image = data_input.col(i);
         for (int c = 0; c < channel_in; c ++) {

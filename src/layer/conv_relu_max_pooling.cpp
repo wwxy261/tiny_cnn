@@ -36,6 +36,7 @@ void Conv_relu_max_pooling::im2col(const Vector& image, Matrix& data_col) {
     int hw_out = height_out * width_out;
     // im2col
     data_col.resize(hw_out, hw_kernel * channel_in);
+    #pragma omp parallel for
     for (int c = 0; c < channel_in; c ++) {
         Vector map = image.block(hw_in * c, 0, hw_in, 1);  // c-th channel map
         for (int i = 0; i < hw_out; i ++) {
