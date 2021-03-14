@@ -9,7 +9,7 @@ from operatorDemo import *
 
 
 mnist = Mnist("./data/mnist/")
-n_epoch = 100
+n_epoch = 1
 
 def test_pytorch():
     x_train, y_train, x_valid, y_valid = map(
@@ -58,7 +58,7 @@ def test_conv_relu_pooling_forward():
 
 if __name__ == "__main__":
     test_pytorch()
-    # test_numpy_serial()
-    # test_conv_relu_pooling_forward()
+    test_numpy_serial()
+    test_conv_relu_pooling_forward()
 
 

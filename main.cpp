@@ -51,7 +51,7 @@ int main() {
     serial_net.add_layer(rule1);
     serial_net.add_layer(pool1);
 
-    const int n_epoch = 10;
+    const int n_epoch = 100;
 
     auto start = std::chrono::system_clock::now();
     for(int i=0;i<n_epoch;i++){
@@ -75,6 +75,7 @@ int main() {
         fuse_net.forward(dataset.test_data);
     }
     end = std::chrono::system_clock::now();
+    duration = std::chrono::duration_cast<std::chrono::microseconds>(end-start);
     out << "fuse_net time cost " << double(duration.count()) * std::chrono::microseconds::period::num /
                                            std::chrono::microseconds::period::den << " seconds." << std::endl;
 
