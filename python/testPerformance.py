@@ -58,7 +58,7 @@ def test_conv_relu_pooling_forward():
 
 if __name__ == "__main__":
     test_pytorch()
-    test_numpy_serial()
-    test_conv_relu_pooling_forward()
+    # test_numpy_serial()
+    # test_conv_relu_pooling_forward()
 
 

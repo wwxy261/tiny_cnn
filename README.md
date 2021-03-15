@@ -1,17 +1,12 @@
 # tiny_CNN性能测试
 
-*convolution, relu 以及pooling是卷积神经网络的基本单元，这个项目采用C++实现了这三个基本单元的Forward以及Backward接口。以及实现了将这三个单元组合为一体的接口以提高性能，组合后的接口有1.2倍的性能提升。该项目采用OpenMP支持多核并行。*
-
-
-[![Downloads](https://img.shields.io/npm/dm/eslint-config-airbnb.svg)](https://www.npmjs.com/package/eslint-config-airbnb)
-[![Downloads](https://img.shields.io/npm/dm/eslint-config-airbnb-base.svg)](https://www.npmjs.com/package/eslint-config-airbnb-base)
-
+*Convolution, Relu 以及Pooling是卷积神经网络的基本单元，这个项目采用C++实现了这三个基本单元的Forward以及Backward接口。以及实现了将这三个单元组合为一体的接口以提高性能，组合后的接口有1.2倍的性能提升。该项目采用OpenMP支持多核并行。*
 
 ## 目录
 
   1. [Introduction](#introduction) 
   2. [Results](#results)
-  3. [Objects](#objects)
+  3. [Reference](#reference)
   
 
 
@@ -56,7 +51,7 @@ make
 
 ## Results
 测试使用mac系统本地测试CPU(2 GHz 四核Intel Core i5)以及南京大学HPC集群(2.5GHz 24核Core)。
-后者还是用了Intel ICC编译器优化。
+后者还使用了Intel ICC编译器优化。
 
 ### 1. forward results
 调用n次从网络输入到输出forward计时测试程序性能。
