@@ -49,6 +49,9 @@ public:
     int pooling_width_out;
     int pooling_dim_out;
 
+    Matrix conv_result;
+    Matrix relu_result;
+
     std::vector<std::vector<int> > max_idxs;  // index of max values
 
     void init();
@@ -65,7 +68,9 @@ public:
 
     }
     void im2col(const Vector& image, Matrix& data_col);
-    void forward(const Matrix &data_input);
+    void col2im(const Matrix& data_col, Vector& image);
+    void forward(const Matrix &data_input) override;
+    void backward(const Matrix& data_input, const Matrix& grad_output) override;
 };
 
 #endif //TINY_CNN_CONV_RELU_MAX_POOLING_H

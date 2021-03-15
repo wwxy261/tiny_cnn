@@ -32,6 +32,8 @@ public:
 
     std::vector<Matrix> data_cols;
 
+
+
     void init();
 
 public:
@@ -45,8 +47,11 @@ public:
     { init(); }
 
     void im2col(const Vector& image, Matrix& data_col);
+    void col2im(const Matrix& data_col, Vector& image);
 
-    void forward(const Matrix& data_input);
+    void forward(const Matrix& data_input) override;
+
+    void backward(const Matrix& data_input, const Matrix& grad_input) override;
 
 };
 

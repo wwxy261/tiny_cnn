@@ -47,3 +47,14 @@ void MaxPooling::forward(const Matrix& data_input) {
         }
     }
 }
+
+void MaxPooling::backward(const Matrix &data_input, const Matrix &grad_input) {
+    grad_output.resize(data_input.rows(), data_input.cols());
+    grad_output.setZero();
+    #pragma omp parallel for
+    for (int i = 0; i < max_idxs.size(); i ++) {  // i-th sample
+        for (int j = 0; j < max_idxs[i].size(); j ++) {
+            grad_output(max_idxs[i][j], i) += grad_input(j, i);
+        }
+    }
+}

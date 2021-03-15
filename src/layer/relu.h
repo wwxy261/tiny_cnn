@@ -9,7 +9,8 @@
 
 class Relu: public Layer{
 public:
-    void forward(const Matrix& data_input);
+    void forward(const Matrix& data_input) override;
+    void backward(const Matrix& data_input, const Matrix& grad_input) override;
 };
 
 

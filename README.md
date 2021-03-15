@@ -6,8 +6,6 @@
 
   1. [Introduction](#introduction) 
   2. [Results](#results)
-  3. [Reference](#reference)
-  
 
 
 ## Introduction
@@ -29,7 +27,16 @@ cd build
 cmake ../
 make
 ```
-### 3. 测试过程
+
+### 3. 算法简介
+1. Convolution Caffe中经典的im2col算法实现
+
+2. Convolution和MaxPooling实现中对最外层的n_sample循环加入parallel for优化
+
+3. 将Convolution,Relu,Max_Pooling融合为一个模块，同样在最外层加入parallel for优化
+
+
+### 4. 测试过程
 使用mnist测试数据集输入，采用如下Pytorch定义的简化CNN网络模型(./python/mnist_cnn_pytorch.py)。
  ```python
  class Net(nn.Module):
@@ -50,24 +57,35 @@ make
 **[⬆ 回到顶部](#目录)**
 
 ## Results
-测试使用mac系统本地测试CPU(2 GHz 四核Intel Core i5)以及南京大学HPC集群(2.5GHz 24核Core)。
-后者还使用了Intel ICC编译器优化。
+### 1. 测试环境
+Mac CPU(2 GHz 四核Intel Core i5)
 
-### 1. forward results
-调用n次从网络输入到输出forward计时测试程序性能。
-| n    | Pytorch  | serial  |fuse    | 24-core | 24-core-fuse|naive-numpy | fuse_numpy
+HPC (2.5GHz 24核Core) ICC编译优化
+
+
+### 2. Forward results
+调用n次从网络输入到输出的forward计算并计时测试程序性能。
+| n    | Pytorch  | serial    |fuse    | 24-core | 24-core-fuse|naive-numpy | fuse_numpy
 |  :---- | :----    | :---    |:---    | :---    |   :---  |   :---         |   :---
 | n=1  | 0.582s | 1.042s |0.995s | 0.452s | 0.431s |   332.457s|   64.329s
 | n=10 | 4.467s | 7.357s |7.850s | 1.433s | 1.254s |      -      |   -   |
 | n=100| 42.883s| 69.868s|77.798s| 10.548s| 9.938s|       -      |   -   |
 
 
+### 3. Backward results
+调用n次从网络输出到输入的backward计算并计时测试程序性能。
+| n       | serial | fuse  |
+| :---    | :---   | :---  |
+| n = 1   | 1.082s |0.956s |
+| n = 10  |9.861s  |9.351s |
+| n = 100 |97.247s |90.616s| 
+
+
+
+
+
 
 **[⬆ back to top](#目录)**
 
-## Objects
 
-
-
-**[⬆ back to top](#目录)**
 

@@ -36,9 +36,10 @@ public:
             height_pool(height_pool), width_pool(width_pool), stride(stride)
     { init(); }
 
-    void forward(const Matrix& data_input);
-    void backward(const Matrix& bottom, const Matrix& grad_top);
-    int output_dim() { return dim_out; }
+    void forward(const Matrix& data_input) override;
+
+    void backward(const Matrix& data_input, const Matrix& grad_input) override;
+
 };
 
 
