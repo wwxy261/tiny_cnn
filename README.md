@@ -16,7 +16,7 @@
 
 ./data mnist数据集
 
-./python numpy实现算法demo以及Pytorch 作benchmark
+./python numpy实现算法demo以及Pytorch搭建网络作为benchmark
 
 ./main.cpp 测试性能代码
 
