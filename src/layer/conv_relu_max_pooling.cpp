@@ -36,7 +36,6 @@ void Conv_relu_max_pooling::im2col(const Vector& image, Matrix& data_col) {
     int hw_out = height_out * width_out;
     // im2col
     data_col.resize(hw_out, hw_kernel * channel_in);
-    #pragma omp parallel for
     for (int c = 0; c < channel_in; c ++) {
         Vector map = image.block(hw_in * c, 0, hw_in, 1);  // c-th channel map
         for (int i = 0; i < hw_out; i ++) {
@@ -74,7 +73,7 @@ void Conv_relu_max_pooling::forward(const Matrix &data_input) {
     data_output.setZero();
     data_output.array() += std::numeric_limits<float>::lowest();
     max_idxs.resize(n_sample, std::vector<int>(pooling_dim_out, 0));
-
+    #pragma omp parallel for
     for (int i = 0; i < n_sample; i ++) {
         // im2col
         Matrix data_col;
